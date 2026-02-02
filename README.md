@@ -1,17 +1,54 @@
-Este proyecto consiste en una aplicación web desarrollada con Laravel para gestionar distintos elementos de una empresa, como clientes, productos y facturas. He creado rutas, controladores, modelos y vistas para poder realizar operaciones básicas (crear, listar, editar y borrar registros) en la mayoría de los módulos. La parte de proveedores no he conseguido hacerla bien del todo, ya que la tabla daba errores y no funciona igual que el resto.
+Proyecto de Gestión con Laravel
+Este proyecto es una aplicación web desarrollada con el framework Laravel. Su objetivo es gestionar diferentes elementos de una empresa, como clientes, productos y facturas. Cada módulo permite realizar operaciones básicas como crear, editar, listar y eliminar registros.
+La mayoría de los apartados funcionan correctamente, aunque el módulo de proveedores no he conseguido completarlo del todo debido a problemas con la base de datos.
 
-A grandes rasgos, los pasos que he seguido han sido:
+Requisitos para ejecutarlo
+PHP 8.1 o superior
 
-Crear el proyecto en Laravel y configurar la estructura básica.
+Composer
 
-Configurar la base de datos y crear las migraciones para las tablas principales.
+Laravel 10
 
-Definir los modelos y controladores para cada módulo (clientes, productos, facturas, etc.).
+Servidor local (Laravel Sail, XAMPP, WAMP, etc.)
 
-Crear las rutas y las vistas con Blade, para poder mostrar formularios y listados.
+SQLite o MySQL (según configuración del .env)
 
-Probar las operaciones CRUD en los distintos módulos para comprobar que funcionaban.
+Navegador web actualizado
 
-Intentar implementar el módulo de proveedores, aunque en este caso no he conseguido que funcione correctamente por problemas con la tabla en la base de datos.
+Pasos básicos de instalación
+Clonar el repositorio:
 
-En general, el proyecto está casi completo, pero queda pendiente arreglar la parte de proveedores.
+bash
+git clone https://github.com/luKii39/Trabajo_Laravel_Clase.git
+Entrar en la carpeta del proyecto:
+
+bash
+cd Trabajo_Laravel_Clase
+Instalar dependencias:
+
+bash
+composer install
+Crear el archivo .env:
+
+bash
+cp .env.example .env
+Generar la clave de la aplicación:
+
+bash
+php artisan key:generate
+Configurar la base de datos en el archivo .env.
+
+Ejecutar las migraciones:
+
+bash
+php artisan migrate
+Iniciar el servidor:
+
+bash
+php artisan serve
+Acceder desde el navegador:
+
+Código
+http://localhost:8000
+
+La contraseña y el usuario crealos de nuevo
