@@ -33,7 +33,6 @@ class VentaController extends Controller
             'productos.*.cantidad' => 'required|integer|min:1',
         ]);
 
-        // Crear venta
         $venta = Venta::create([
             'cliente_id' => $request->cliente_id,
             'fecha' => $request->fecha,
@@ -42,7 +41,6 @@ class VentaController extends Controller
 
         $total = 0;
 
-        // Crear detalles
         foreach ($request->productos as $item) {
             $producto = Producto::find($item['id']);
             $cantidad = $item['cantidad'];
@@ -60,9 +58,16 @@ class VentaController extends Controller
             $total += $subtotal;
         }
 
-        // Actualizar total
         $venta->update(['total' => $total]);
 
         return redirect()->route('ventas.index')->with('success', 'Venta registrada correctamente.');
+    }
+
+    public function destroy(Venta $venta)
+    {
+        $venta->detalles()->delete();
+        $venta->delete();
+
+        return redirect()->route('ventas.index')->with('success', 'Venta eliminada correctamente.');
     }
 }

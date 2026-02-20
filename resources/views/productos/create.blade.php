@@ -11,7 +11,17 @@
 <div class="card">
     <div class="card-body">
 
-        <form action="{{ route('productos.store') }}" method="POST">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
@@ -32,6 +42,16 @@
             <div class="form-group">
                 <label>Stock</label>
                 <input type="number" name="stock" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>Imagen del producto</label>
+                <input type="file" name="imagen" class="form-control" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label>Archivo PDF</label>
+                <input type="file" name="pdf" class="form-control" accept=".pdf">
             </div>
 
             <button class="btn btn-success">Guardar</button>

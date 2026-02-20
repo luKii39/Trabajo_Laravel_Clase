@@ -14,7 +14,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered table-striped">
+    <table id="tabla-clientes" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -33,11 +33,13 @@
                     <td>{{ $cliente->telefono }}</td>
                     <td>
                         <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">Editar</a>
-                        <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" style="display:inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</button>
-                        </form>
+                        @if (auth()->user()->isAdmin())
+                            <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" style="display:inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @empty
@@ -48,4 +50,16 @@
         </tbody>
     </table>
 
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function () {
+        $('#tabla-clientes').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+            }
+        });
+    });
+</script>
 @endsection

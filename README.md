@@ -1,54 +1,40 @@
-Proyecto de Gestión con Laravel
-Este proyecto es una aplicación web desarrollada con el framework Laravel. Su objetivo es gestionar diferentes elementos de una empresa, como clientes, productos y facturas. Cada módulo permite realizar operaciones básicas como crear, editar, listar y eliminar registros.
-La mayoría de los apartados funcionan correctamente, aunque el módulo de proveedores no he conseguido completarlo del todo debido a problemas con la base de datos.
+# CRM Empresa - Segunda Entrega
 
-Requisitos para ejecutarlo
-PHP 8.1 o superior
+## Descripción
+CRM desarrollado con Laravel y AdminLTE para gestión de 
+clientes, productos, proveedores, ventas y compras.
 
-Composer
+## Tecnologías utilizadas
+- Laravel 11
+- AdminLTE 3
+- DataTables 1.10
+- MySQL
 
-Laravel 10
+## Funcionalidades de la Segunda Entrega
 
-Servidor local (Laravel Sail, XAMPP, WAMP, etc.)
+### DataTables
+Todos los módulos (Clientes, Productos, Proveedores, Ventas 
+y Compras) usan DataTables con buscador y paginación.
 
-SQLite o MySQL (según configuración del .env)
+### Subida de archivos
+- Imagen del producto (jpg, png...)
+- PDF del producto
+- Almacenados en storage/app/public
 
-Navegador web actualizado
+### Roles y permisos
+- **Admin**: puede crear, editar y eliminar
+- **Usuario**: solo puede crear y editar
+- El botón Eliminar solo aparece si el usuario es admin
 
-Pasos básicos de instalación
-Clonar el repositorio:
+## Instalación
+1. Clonar el repositorio
+2. `composer install`
+3. Copiar `.env.example` a `.env` y configurar base de datos
+4. `php artisan key:generate`
+5. `php artisan migrate`
+6. `php artisan storage:link`
+7. `php artisan serve`
 
-bash
-git clone https://github.com/luKii39/Trabajo_Laravel_Clase.git
-Entrar en la carpeta del proyecto:
-
-bash
-cd Trabajo_Laravel_Clase
-Instalar dependencias:
-
-bash
-composer install
-Crear el archivo .env:
-
-bash
-cp .env.example .env
-Generar la clave de la aplicación:
-
-bash
-php artisan key:generate
-Configurar la base de datos en el archivo .env.
-
-Ejecutar las migraciones:
-
-bash
-php artisan migrate
-Iniciar el servidor:
-
-bash
-php artisan serve
-Acceder desde el navegador:
-
-Código
-http://localhost:8000
-
-La contraseña y el usuario crealos de nuevo
+## Usuarios de prueba
+- **Admin**: hugoeldecadiz@gmail.com / 2822003Hugo
+- **Usuario**: usuario@crm.com / password

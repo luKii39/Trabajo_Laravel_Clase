@@ -34,7 +34,6 @@ class CompraController extends Controller
             'productos.*.precio' => 'required|numeric|min:0',
         ]);
 
-        // Crear compra
         $compra = Compra::create([
             'proveedor_id' => $request->proveedor_id,
             'fecha' => $request->fecha,
@@ -43,7 +42,6 @@ class CompraController extends Controller
 
         $total = 0;
 
-        // Crear detalles
         foreach ($request->productos as $item) {
             $cantidad = $item['cantidad'];
             $precio = $item['precio'];
@@ -60,9 +58,16 @@ class CompraController extends Controller
             $total += $subtotal;
         }
 
-        // Actualizar total
         $compra->update(['total' => $total]);
 
         return redirect()->route('compras.index')->with('success', 'Compra registrada correctamente.');
+    }
+
+    public function destroy(Compra $compra)
+    {
+        $compra->detalles()->delete();
+        $compra->delete();
+
+        return redirect()->route('compras.index')->with('success', 'Compra eliminada correctamente.');
     }
 }

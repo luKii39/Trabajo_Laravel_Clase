@@ -25,9 +25,21 @@ class ProductoController extends Controller
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
+            'imagen' => 'nullable|max:2048',
+            'pdf' => 'nullable|max:5120',
         ]);
 
-        Producto::create($request->all());
+        $datos = $request->only(['nombre', 'descripcion', 'precio', 'stock']);
+
+        if ($request->hasFile('imagen')) {
+            $datos['imagen'] = $request->file('imagen')->store('productos/imagenes', 'public');
+        }
+
+        if ($request->hasFile('pdf')) {
+            $datos['pdf'] = $request->file('pdf')->store('productos/pdfs', 'public');
+        }
+
+        Producto::create($datos);
 
         return redirect()->route('productos.index')->with('success', 'Producto creado correctamente.');
     }
@@ -44,9 +56,21 @@ class ProductoController extends Controller
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
+            'imagen' => 'nullable|max:10240',
+            'pdf' => 'nullable|max:10240',
         ]);
 
-        $producto->update($request->all());
+        $datos = $request->only(['nombre', 'descripcion', 'precio', 'stock']);
+
+        if ($request->hasFile('imagen')) {
+            $datos['imagen'] = $request->file('imagen')->store('productos/imagenes', 'public');
+        }
+
+        if ($request->hasFile('pdf')) {
+            $datos['pdf'] = $request->file('pdf')->store('productos/pdfs', 'public');
+        }
+
+        $producto->update($datos);
 
         return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
     }
